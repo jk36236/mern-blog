@@ -1,0 +1,26 @@
+{
+  "name": "Mern-blog",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev":"nodemon api/index.js",
+    "start":"node api/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jk36236/mern-blog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jk36236/mern-blog/issues"
+  },
+  "homepage": "https://github.com/jk36236/mern-blog#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9"
+  }
+}
