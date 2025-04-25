@@ -7,7 +7,10 @@ const FooterCom = () => {
   return (
     <Footer container className='border border-t-8 border-teal-500 '>
       <div className='w-full max-w-7xl mx-auto'>
+
+{/* div containing all items */}
         <div className='grid w-full justify-between sm:flex md:grid-cols-1 '>
+          
           {/* logo */}
           <div className='mt-5'>
           <Link to="/" className='self-center whitespace-nowrap text-lg sm:text-xl font-semibold dark:text-white'>
@@ -15,6 +18,8 @@ const FooterCom = () => {
         Blog
       </Link>
           </div>
+
+{/* div for 2nd section */}
         <div className='grid grid-cols-2 gap-8 mt-4 sm:grid-cols-3 sm:gap-6  '>
           {/* About */}
           <div>
