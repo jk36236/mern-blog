@@ -78,7 +78,7 @@ const FooterCom = () => {
          </Footer.LinkGroup>
          </div>
         </div>
-        </div>
+      </div>
     <Footer.Divider />
       <div className='w-full sm:flex sm:items-center sm:justify-between'>
         <Footer.Copyright href='#' by="Jatin's blog" year={new Date().getFullYear()} />
