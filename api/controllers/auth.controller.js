@@ -36,7 +36,7 @@ export const signin = async (req,res,next)=>{
    }
 
    try{
-     const validUser=await User.findOne({username});
+     const validUser=await User.findOne({email});
      if(!validUser){
       return next(errorHandler(404,'User not found'));
      }
@@ -74,7 +74,7 @@ export const google = async(req,res,next) =>{
      const user= await User.findOne({email});
       if(user){
         const token= jwt.sign({id:user._id}, process.env.JWT_SECRET,)
-        const {password:pass, ...rest}= validUser._doc;
+        const {password:pass, ...rest}= user._doc;
       //set cookie 
       res.status(200).cookie('access_token',token,{
         httpOnly:true
@@ -92,7 +92,7 @@ export const google = async(req,res,next) =>{
        });
        await newUser.save();
        const token= jwt.sign({id: newUser._id},process.env.JWT_SECRET);
-       const {password:pass, ...rest}= validUser._doc;
+       const {password:pass, ...rest}= user._doc;
        //set cookie 
        res.status(200).cookie('access_token',token,{
          httpOnly:true

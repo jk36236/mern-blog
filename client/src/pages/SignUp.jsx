@@ -93,7 +93,7 @@ const SignUp = () => {
             <Button gradientDuoTone='purpleToPink'  type='submit' disabled={loading}>
             { loading ? (
               <>
-              <Spinner size={sm}/>
+              <Spinner size='sm'/>
               <span className='pl-3'>Loading...</span>
               </>
             ) : 'Sign Up'}

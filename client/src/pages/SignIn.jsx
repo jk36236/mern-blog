@@ -31,6 +31,7 @@ const SignIn = () => {
       body:JSON.stringify(formData),
     })
     const data= await res.json();
+   
     //same username then error i.e if user already exists and we try signup with same username then error
     if (data.success === false){
       dispatch(signInFailure(data.message));
@@ -85,7 +86,7 @@ const SignIn = () => {
             <Button gradientDuoTone='purpleToPink'  type='submit' disabled={loading}>
             { loading ? (
               <>
-              <Spinner size={sm}/>
+              <Spinner size='sm'/>
               <span className='pl-3'>Loading...</span>
               </>
             ) : 'Sign In'}
