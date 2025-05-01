@@ -62,5 +62,43 @@ export const signin = async (req,res,next)=>{
 
    }catch(error){
     next(error);
-   }
+  }
+}
+
+
+//google auth controller
+export const google = async(req,res,next) =>{
+  //check if user exists ,if yes then signin otherwise create new user
+  const {name,email,googlePhotoUrl}=req.body;
+  try {
+     const user= await User.findOne({email});
+      if(user){
+        const token= jwt.sign({id:user._id}, process.env.JWT_SECRET,)
+        const {password:pass, ...rest}= validUser._doc;
+      //set cookie 
+      res.status(200).cookie('access_token',token,{
+        httpOnly:true
+      }).json(rest);
+      }else{
+        //we can't signup user without pswd but we don;t have pswrd here , so we will generate random pswrd for and signup him an later on let him change the pswrd
+       const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8); //to make it strong we use 2 times random pswrd
+       const hashedPassword= bcryptjs.hashSync(generatedPassword,10);
+
+       const newUser= new User({
+        username: name.toLowerCase().split(' ').join('') + Math.random().toString(9).slice(-4),//to make username unique ,ex: Sahand Ghav(we get) => sahandghav1276
+        email,
+        password:hashedPassword,
+        profilePicture:googlePhotoUrl,
+       });
+       await newUser.save();
+       const token= jwt.sign({id: newUser._id},process.env.JWT_SECRET);
+       const {password:pass, ...rest}= validUser._doc;
+       //set cookie 
+       res.status(200).cookie('access_token',token,{
+         httpOnly:true
+       }).json(rest);
+      }
+  } catch (error) {
+    next(error);
+  }
 }

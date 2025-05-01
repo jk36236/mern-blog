@@ -3,7 +3,8 @@ import React from 'react'
 import { useState } from 'react'
 import { Link ,useNavigate} from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux'
-import { signInStart,signinSuccess,signInFailure } from '../redux/user/userSlice';
+import { signInStart,signInSuccess,signInFailure } from '../redux/user/userSlice';
+import OAuth from '../components/OAuth'
 
 
 const SignIn = () => {
@@ -35,11 +36,11 @@ const SignIn = () => {
       dispatch(signInFailure(data.message));
     }
     if(res.ok){
-      dispatch(signinSuccess(data));
+      dispatch(signInSuccess(data));
       navigate('/');
     }
   } catch (error) {
-    dispatch(signInFailur(error.message));//error on client side 
+    dispatch(signInFailure(error.message));//error on client side 
   }
   }
 
@@ -89,6 +90,7 @@ const SignIn = () => {
               </>
             ) : 'Sign In'}
             </Button>
+            <OAuth />
           </form>
 
           <div className='flex gap-2 text-sm mt-5'>
