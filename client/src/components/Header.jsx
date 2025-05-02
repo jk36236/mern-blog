@@ -7,7 +7,7 @@ import {useSelector} from 'react-redux';
 
 const Header = () => {
   const path=useLocation().pathname;
-  const currentUser= useSelector((state) => state.user);
+  const {currentUser}= useSelector((state) => state.user);
 
   return (
     <Navbar className='border-b-2'>
@@ -36,7 +36,7 @@ const Header = () => {
       </Button>
 
 {/* if currentUser exists show avatar with dropdown menu else show signin button */}
-{currentUser  ? (
+{currentUser ? (
           <Dropdown
             arrowIcon={false}
             inline
