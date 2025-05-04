@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ mongoose
 
 const app=express();
 app.use(express.json());
+app.use(cookieParser());//because we want to extract cookie from browser
 
 app.listen(3000,()=>{
   console.log('server is running on port 3000');
