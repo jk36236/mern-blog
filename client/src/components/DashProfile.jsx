@@ -1,7 +1,7 @@
 import { Alert, Button, Modal, TextInput } from "flowbite-react";
 import { useState,useRef,useEffect } from "react";
 import { useSelector, useDispatch} from "react-redux"
-import { updateStart,updateSuccess,updateFailure, deleteUserFailure, deleteUserStart, deleteUserSuccess } from "../redux/user/userSlice";
+import { updateStart,updateSuccess,updateFailure, deleteUserFailure, deleteUserStart, deleteUserSuccess ,signoutSuccess} from "../redux/user/userSlice";
 
 import {HiOutlineExclamationCircle } from 'react-icons/hi';
 
@@ -16,6 +16,7 @@ const DashProfile = () => {
  const [updateUserSuccess,setUpdateUserSuccess]=useState(null);
  const [updateUserError,setUpdateUserError]=useState(null);
  const [showModal,setShowModal]=useState(false);
+ 
 
   const filePickerRef=useRef();
   const dispatch=useDispatch();
@@ -133,6 +134,22 @@ const handleDeleteUser= async ()=>{
   }
 }
 
+const handleSignout= async()=>{
+  try {
+    const res= await fetch('/api/user/signout',{
+      method:'POST',
+    });
+    const data= await res.json();
+    if(!res.ok){
+      console.log(data.message);
+    }else{
+      dispatch(signoutSuccess());
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 
   return (
     <div className="max-w-lg mx-auto p-3 w-full">
@@ -160,7 +177,7 @@ const handleDeleteUser= async ()=>{
 
       <div className="text-red-500 flex justify-between mt-5">
         <span onClick={()=> setShowModal(true)} className="cursor-pointer">Delete Account</span>
-        <span className="cursor-pointer">Sign Out</span>
+        <span onClick={handleSignout}  className="cursor-pointer">Sign Out</span>
       </div>
  {updateUserSuccess && (
    <Alert color='success' className='mt-5'>
