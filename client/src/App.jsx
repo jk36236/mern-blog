@@ -2,8 +2,10 @@ import {BrowserRouter, Routes, Route} from
 "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import OnlyAdminPrivateRoute from "./components/OnlyAdminPrivateRoute copy";
 import PrivateRoute from "./components/PrivateRoute";
 import About from "./pages/About";
+import CreatePost from "./pages/CreatePost";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
@@ -22,6 +24,10 @@ function App() {
       
       <Route element={<PrivateRoute />}>
       <Route path="/dashboard" element={<Dashboard />} />
+      </Route>
+
+      <Route element={<OnlyAdminPrivateRoute />}>
+      <Route path="/create-post" element={<CreatePost />} />
       </Route>
 
       <Route path="/projects" element={<Projects />} />

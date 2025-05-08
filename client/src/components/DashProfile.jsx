@@ -4,11 +4,11 @@ import { useSelector, useDispatch} from "react-redux"
 import { updateStart,updateSuccess,updateFailure, deleteUserFailure, deleteUserStart, deleteUserSuccess ,signoutSuccess} from "../redux/user/userSlice";
 
 import {HiOutlineExclamationCircle } from 'react-icons/hi';
-
+import {Link} from 'react-router-dom';
 
 
 const DashProfile = () => {
-  const {currentUser, error}= useSelector((state)=> state.user);
+  const {currentUser, error,loading}= useSelector((state)=> state.user);
   const [imageFile,setImageFile]= useState(null);
   const [imageFileUrl,setImageFileUrl]= useState(null); 
   const [formData,setFormData]=useState({});
@@ -170,9 +170,26 @@ const handleSignout= async()=>{
 
        <TextInput type="password" id='password' placeholder="password"  onChange={handleChange}/>
        {/* button */}
-       <Button type='submit' gradientDuoTone='purpleToBlue' outline>
-        Update
+       <Button type='submit' gradientDuoTone='purpleToBlue' outline 
+       disabled={loading || imageFileUploading}
+       >
+      {loading ? 'Loading...' : 'Update'}
        </Button>
+ {/* create post button only availaible to admin */}
+ {
+  currentUser.isAdmin && (
+    <Link to={'/create-post'}>
+    <Button
+      type='button'
+      gradientDuoTone='purpleToPink'
+      className='w-full'
+    >
+   Create a post
+    </Button>
+    </Link>
+  )
+ }
+
       </form>
 
       <div className="text-red-500 flex justify-between mt-5">
