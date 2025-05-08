@@ -37,9 +37,11 @@ if(req.body.username){
     return next(errorHandler(400,'Username must be lowercase'));
   }
 //it don't include any characters
-  if(!req.body.username.match(/^[a-zA-Z0-9] + $/)){
+  if(!req.body.username.match(/^[a-zA-Z0-9]+$/)){
     return next(errorHandler(400,'Username can only contain letters and numbers'));
   }
+
+}
   //now update the user
   try {
     const updatedUser= await User.findByIdAndUpdate(req.params.userId,{
@@ -59,4 +61,3 @@ if(req.body.username){
 }
 
 
-}
