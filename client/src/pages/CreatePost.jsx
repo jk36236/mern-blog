@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const CreatePost = () => {
   const [file,setFile]=useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
+  const[imageFileUploading,setImageFileUploading]=useState(false);
   const [formData, setFormData] = useState({});
   const [publishError,setPublishError]=useState(null);
   const navigate=useNavigate();
@@ -18,6 +19,8 @@ const CreatePost = () => {
         return;
       }
   setImageUploadError(null);
+  setImageFileUploading(true);
+
   const data = new FormData()
   data.append("file", file)
   data.append("upload_preset", "profile")
@@ -37,10 +40,12 @@ const CreatePost = () => {
     // console.log(data.url);
     setImageUploadError(null);
     setFormData({ ...formData, image: data.url}); 
+    setImageFileUploading(false);
   })
     } catch (error) {
       setImageUploadError('Image upload failed');
       console.log(error);
+      setImageFileUploading(false);
     }
   }
 
@@ -103,7 +108,9 @@ const handleSubmit=async (e)=>{
        />
       
 
-      <Button type='submit' gradientDuoTone='purpleToPink'>Publish </Button>
+      <Button type='submit' gradientDuoTone='purpleToPink' disabled={imageFileUploading}>
+      {imageFileUploading ? 'Uploading Image...' : 'Publish'}
+         </Button>
 
       {
         publishError && <Alert className='mt-5' color='failure'>{publishError}</Alert>
