@@ -29,3 +29,56 @@ try {
   next(error);
 }
 }
+
+//we'll use this in multiple places like in :- getposts, when we search posts, and in recent post
+//now we can use this api route everywhere in our application
+
+export const getPosts = async(req,res,next)=>{
+ try {
+  const startIndex= parseInt(req.query.startIndex) || 0;//to know from which index to start fetching posts
+  const limit= parseInt(re.query.limit) || 9; //to limit posts on 1 page
+  const sortDirection = req.query.order === 'asc' ? 1 : -1;
+
+  const posts = await Post.find({
+    //finding posts in case of different scenarios i.e according to query which user do
+...(req.query.userId && {userId: req.query.userId}), //--for user
+...(req.query.category && {category: req.query.category}),//--for category
+...(req.query.slug && {category: req.query.slug}),//--for slug
+...(req.query.postId && {_id: req.query.postId}),//--for postID
+
+//for search term- we're going to search in title ,content
+...(req.query.searchTerm && {
+  $or:[
+    {title:{$regex: req.query.searchTerm, $options: 'i'}},//to search inside title ,option'i' means case(upper,lower) does not matter
+    {content:{$regex: req.query.searchTerm, $options: 'i'}}, //to search inside content
+  ],
+}),
+ })
+.sort({ updatedAt: sortDirection })
+.skip(startIndex)
+.limit(limit)
+
+
+const totalPosts=await Post.countDocuments();
+
+//posts in last month
+const now= new Date();
+const oneMonthAgo= new Date(
+  now.getFullYear(),
+  now.getFullMonth() - 1,
+  now.getDate()
+);
+
+const lastMonthPosts= await Post.countDocuments({
+  createdAt:{$gte:oneMonthAgo},
+})
+res.status(200).json({
+  posts,
+  totalPosts,
+  lastMonthPosts,
+});
+
+ } catch (error) {
+  next(error);
+ }
+}
