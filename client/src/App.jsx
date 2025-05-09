@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import SignIn from "./pages/Signin";
 import SignUp from "./pages/Signup";
+import UpdatePost from "./pages/UpdatePost";
 
 
 
@@ -28,6 +29,7 @@ function App() {
 
       <Route element={<OnlyAdminPrivateRoute />}>
       <Route path="/create-post" element={<CreatePost />} />
+      <Route path="/update-post/:postId" element={<UpdatePost />} />
       </Route>
 
       <Route path="/projects" element={<Projects />} />
