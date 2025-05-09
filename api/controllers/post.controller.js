@@ -11,6 +11,7 @@ export const create =async (req,res,next)=>{
   }
 //for seo purpose it's better to have a slug instead of having a post id or url
 //we 'll replace anything that is not letters and numbers with '-'
+//when a new post is created ,each post will be redirected to a new url by using slug
 
 const slug= req.body.title.split(' ').join('-').toLowerCase().replace(/[^a-zA-Z0-9-]/g, '');
 
