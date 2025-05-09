@@ -36,15 +36,15 @@ try {
 export const getPosts = async(req,res,next)=>{
  try {
   const startIndex= parseInt(req.query.startIndex) || 0;//to know from which index to start fetching posts
-  const limit= parseInt(re.query.limit) || 9; //to limit posts on 1 page
+  const limit= parseInt(req.query.limit) || 9; //to limit posts on 1 page
   const sortDirection = req.query.order === 'asc' ? 1 : -1;
 
   const posts = await Post.find({
     //finding posts in case of different scenarios i.e according to query which user do
 ...(req.query.userId && {userId: req.query.userId}), //--for user
 ...(req.query.category && {category: req.query.category}),//--for category
-...(req.query.slug && {category: req.query.slug}),//--for slug
-...(req.query.postId && {_id: req.query.postId}),//--for postID
+...(req.query.slug && {slug: req.query.slug}),//--for slug
+...(req.query.postId && { _id: req.query.postId}),//--for postID
 
 //for search term- we're going to search in title ,content
 ...(req.query.searchTerm && {
@@ -65,7 +65,7 @@ const totalPosts=await Post.countDocuments();
 const now= new Date();
 const oneMonthAgo= new Date(
   now.getFullYear(),
-  now.getFullMonth() - 1,
+  now.getMonth() - 1,
   now.getDate()
 );
 
@@ -81,4 +81,4 @@ res.status(200).json({
  } catch (error) {
   next(error);
  }
-}
+};
