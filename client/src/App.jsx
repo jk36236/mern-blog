@@ -8,6 +8,7 @@ import About from "./pages/About";
 import CreatePost from "./pages/CreatePost";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
+import PostPage from "./pages/PostPage";
 import Projects from "./pages/Projects";
 import SignIn from "./pages/Signin";
 import SignUp from "./pages/Signup";
@@ -33,6 +34,7 @@ function App() {
       </Route>
 
       <Route path="/projects" element={<Projects />} />
+      <Route path="/post/:postSlug" element={<PostPage />} />
       <Route path="/sign-in" element={<SignIn />} />
     <Route path="/sign-up" element={<SignUp />}/>     
     </Routes>
