@@ -11,6 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import PostPage from "./pages/PostPage";
 import Projects from "./pages/Projects";
+import Search from "./pages/Search";
 import SignIn from "./pages/Signin";
 import SignUp from "./pages/Signup";
 import UpdatePost from "./pages/UpdatePost";
@@ -38,7 +39,8 @@ function App() {
       <Route path="/projects" element={<Projects />} />
       <Route path="/post/:postSlug" element={<PostPage />} />
       <Route path="/sign-in" element={<SignIn />} />
-    <Route path="/sign-up" element={<SignUp />}/>     
+      <Route path="/sign-up" element={<SignUp />}/>     
+      <Route path="/search" element={<Search />}/>     
     </Routes>
     <Footer />
    </BrowserRouter>
