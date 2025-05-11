@@ -1,5 +1,6 @@
 import {useState,useEffect} from 'react';
 import { useLocation } from "react-router-dom"
+import DashboardComp from '../components/DashboardComp';
 import DashComments from '../components/DashComments';
 import DashPosts from '../components/DashPosts';
 import DashProfile from '../components/DashProfile';
@@ -39,6 +40,9 @@ const Dashboard = () => {
 
        {/* comments  */}
        {tab === 'comments' && <DashComments />}
+
+        {/* dashboard comp */}
+      {tab === 'dash' && <DashboardComp />}
       </div>
     
     
