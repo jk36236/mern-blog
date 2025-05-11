@@ -12,8 +12,8 @@ import Home from "./pages/Home";
 import PostPage from "./pages/PostPage";
 import Projects from "./pages/Projects";
 import Search from "./pages/Search";
-import SignIn from "./pages/Signin";
-import SignUp from "./pages/Signup";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 import UpdatePost from "./pages/UpdatePost";
 
 
